@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eternals Information</title>
+</head>
+<body>
+
+    <h1>The Eternals</h1>
+    <div class="charactersList"></div>
+
+    <p class="eternalsInfo"></p>
+
+    <label for="skillSearch">What attribute skill are you looking for?</label>
+    <input type="text" id="skillSearch" name="skillSearch" maxlength="20" size="20">
+    <button onclick="findCharacter()">Search for skill!</button>
+
+    <p class="foundCharacterInfo"></p>
+    <img class="foundCharacterPic" alt="Character picture">
+
+    <script>
+    const eternalsData = [
+        {
+            name: "Thena",
+            age: 5000,
+            skills: ["sword", "strategy", "speed"],
+            pic: "thena.png"
+        },
+        {
+            name: "Ikaris",
+            age: 7000,
+            skills: ["flight", "laser eyes", "strength"],
+            pic: "ikaris.png"
+        },
+        {
+            name: "Kingo",
+            age: 5000,
+            skills: ["sword", "energy blasts", "agility"],
+            pic: "kingo.png"
+        },
+        {
+            name: "Sersi",
+            age: 5000,
+            skills: ["transmutation", "intelligence", "empathy"],
+            pic: "sersi.png"
+        },
+        {
+            name: "Phastos",
+            age: 7000,
+            skills: ["technology", "engineering", "intellect"],
+            pic: "phastos.png"
+        }
+    ];
+
+    // Display the list of characters
+    const charactersList = document.querySelector(".charactersList");
+    eternalsData.forEach((eternal) => {
+        const listItem = document.createElement("div");
+        listItem.textContent = `${eternal.name} (Skills: ${eternal.skills.join(", ")})`;
+        charactersList.appendChild(listItem);
+    });
+
+    // Function to find characters by skill
+    const findCharacter = () => {
+        let skillSearch = document.querySelector("#skillSearch").value.toLowerCase();
+        let foundCharacterInfo = document.querySelector(".foundCharacterInfo");
+        let foundCharacterPic = document.querySelector(".foundCharacterPic");
+
+        const foundEternal = eternalsData.find(eternal => eternal.skills.includes(skillSearch));
+
+        if (foundEternal) {
+            foundCharacterInfo.textContent = `${foundEternal.name} is skilled in ${skillSearch}.`;
+            foundCharacterPic.src = foundEternal.pic;
+        } else {
+            foundCharacterInfo.textContent = "No character with that skill found.";
+            foundCharacterPic.src = "";
+        }
+    }
+    </script>
+
+</body>
+</html>
